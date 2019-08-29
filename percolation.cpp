@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
 #include <iostream>
 using namespace std;
 
@@ -7,7 +8,8 @@ using namespace std;
 
 int main()
 {
-  srand(time(0));
+  int start = time(nullptr);
+  srand(time(nullptr));
 
   unsigned int N;
   unsigned long int total_els, iter = 0;
@@ -15,15 +17,14 @@ int main()
   cout << "Enter size of matrix: ";
   cin >> N;
   total_els = N * N;
-  unsigned long int *rand_hash = new unsigned long int[total_els];
+  unsigned int *rand_hash = new unsigned int[total_els];
 
   // Added 2 because last 2 elements will be treated as virtual top and bottom respectively.
   WQuickUnionUF U1(total_els + 2);
   unsigned long int v_top = total_els;
   unsigned long int v_bottom = total_els + 1;
 
-  for (unsigned long int i = 0; i < total_els; i++)
-    rand_hash[i] = 0;
+  memset(rand_hash, 0, total_els);
 
   while (1)
   {
@@ -62,6 +63,9 @@ int main()
 
   probability = (double)iter / (double)total_els;
   cout << probability << endl;
+
+  int end = time(nullptr);
+  cout << end - start << endl;
 
   return 0;
 }
