@@ -1,15 +1,14 @@
 #include <cstdlib>
-#include <ctime>
 #include <cstring>
 #include <iostream>
 using namespace std;
 
 #include "weighted-quick-union.h"
+#include "generate-random.h"
 
 int main()
 {
   int start = time(nullptr);
-  srand(time(nullptr));
 
   unsigned int N;
   unsigned long int total_els, iter = 0;
@@ -28,7 +27,7 @@ int main()
 
   while (1)
   {
-    unsigned long int r = rand() % total_els;
+    unsigned long int r = getRandomNumber(total_els);
     if (!rand_hash[r])
     {
       rand_hash[r] = 1;
@@ -54,14 +53,14 @@ int main()
       if (r % N < N - 1 && rand_hash[r + 1] == 1)
         U1.Union(r + 1, r);
 
-      probability = (double)iter / (double)total_els;
+      probability = (float)iter / (float)total_els;
       if (probability > 0.5 && U1.connected(v_top, v_bottom))
         break;
     }
   }
   delete[] rand_hash;
 
-  probability = (double)iter / (double)total_els;
+  probability = (float)iter / (float)total_els;
   cout << probability << endl;
 
   int end = time(nullptr);
