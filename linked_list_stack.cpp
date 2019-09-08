@@ -23,6 +23,12 @@ public:
   // Destructor
   ~Stack()
   {
+    while (top != nullptr)
+    {
+      node<T> *temp = top->next;
+      delete top;
+      top = temp;
+    }
     delete top;
   }
 

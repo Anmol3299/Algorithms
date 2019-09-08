@@ -23,8 +23,13 @@ public:
   }
   ~Queue()
   {
+    if (front != nullptr)
+    {
+      node<T> *temp = front->next;
+      delete front;
+      front = temp;
+    }
     delete front;
-    delete rear;
   }
 
   void enqueue(T data);
@@ -91,6 +96,10 @@ int main()
   for (int i = 0; i < 5; i++)
     Q.enqueue(i);
 
+  Q.dequeue();
+  Q.dequeue();
+  Q.dequeue();
+  Q.dequeue();
   Q.dequeue();
 
   Q.display();
