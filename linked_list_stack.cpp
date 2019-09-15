@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 using namespace std;
 
 template <class T>
@@ -13,11 +14,13 @@ template <class T>
 class Stack
 {
   node<T> *top;
+  unsigned long long int start;
 
 public:
   // Constructor
   Stack()
   {
+    start = time(nullptr);
     top = nullptr;
   }
   // Destructor
@@ -30,6 +33,8 @@ public:
       top = temp;
     }
     delete top;
+
+    cout << time(nullptr) - start;
   }
 
   // Function to insert data in Stack

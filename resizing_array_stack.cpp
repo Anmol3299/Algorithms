@@ -1,18 +1,22 @@
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
+
+#define ull unsigned long long
 
 using namespace std;
 
 class Stack
 {
   int *arr;
-  int top, sz;
+  ull int top, sz, start;
 
-  void resizeStack(int new_size);
+  void resizeStack(ull int new_size);
 
 public:
-  Stack(int stack_size)
+  Stack(ull int stack_size)
   {
+    start = time(nullptr);
     top = -1;
     arr = new int[stack_size];
     sz = stack_size;
@@ -20,6 +24,7 @@ public:
   ~Stack()
   {
     delete[] arr;
+    cout << time(nullptr) - start;
   }
 
   void push(int item);
@@ -27,7 +32,7 @@ public:
   void display();
 };
 
-void Stack::resizeStack(int new_size)
+void Stack::resizeStack(ull int new_size)
 {
   int *temp = new int[new_size];
   memmove(temp, arr, sz * sizeof(int));
@@ -66,14 +71,14 @@ void Stack::display()
 
 int main()
 {
-  Stack S(10);
-  for (int i = 0; i < 15; i++)
-    S.push(i);
+  Stack S(1);
+  for (ull int i = 0; i < 1000000000; i++)
+    S.push(2);
 
   // S.display();
-  S.pop();
-  S.pop();
-  S.pop();
-  S.display();
+  // S.pop();
+  // S.pop();
+  // S.pop();
+  // S.display();
   return 0;
 }
